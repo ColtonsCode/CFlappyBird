@@ -19,6 +19,9 @@ int main(void) {
 
     RenderTexture renderTexture = LoadRenderTexture(600, 800);
 
+    Texture2D background = LoadTexture("assets/Background/Background2.png");
+    float bg_x = 0;
+
     // Game init
     int score = 0;
 
@@ -58,6 +61,18 @@ int main(void) {
         BeginTextureMode(renderTexture);
 
         ClearBackground(BLACK);
+
+        DrawTexturePro(
+            background,
+            Rectangle {bg_x,0, (float)background.width, (float)background.height},
+            Rectangle{ 0, 0, gScreenWidth, gScreenHeight },
+            Vector2{ 0, 0 },
+            0,
+            WHITE
+        );
+
+        if (bird.alive)
+            bg_x += 0.05;
 
         pipe_manager_draw(&pipes);
 
